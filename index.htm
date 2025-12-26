@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>滑舌最悪メーカー</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f4f8; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { font-size: 1.5rem; text-align: center; color: #555; }
+        textarea { width: 100%; height: 100px; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; box-sizing: border-box; resize: none; }
+        textarea:focus { border-color: #007bff; outline: none; }
+        .result-label { margin-top: 20px; font-weight: bold; color: #007bff; }
+        #output { margin-top: 10px; padding: 15px; background: #e9ecef; border-radius: 8px; min-height: 50px; word-break: break-all; font-size: 1.2rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👅 滑舌最悪メーカー</h1>
+    <p>文章を入れると、滑舌が悪い感じに変換しましゅ。</p>
+    
+    <textarea id="input" placeholder="ここに文章を入力してくだしゃい..."></textarea>
+
+    <div class="result-label">変換結果：</div>
+    <div id="output"></div>
+</div>
+
+<script>
+    const map = {
+        // 基本の置き換えルール
+        'か': 'きゃ', 'き': 'きゅぃ', 'く': 'きゅ', 'け': 'きゅぇ', 'こ': 'きょ',
+        'さ': 'ちゃ', 'し': 'ち', 'す': 'ちゅ', 'せ': 'ちゅぇ', 'そ': 'ちょ',
+        'た': 'ちゃ', 'ち': 'ち', 'つ': 'ちゅ', 'て': 'ちゅぇ', 'と': 'ちょ',
+        'な': 'ぬぁ', 'に': 'に', 'ぬ': 'にゅ', 'ね': 'にゅぇ', 'の': 'にょ',
+        'は': 'ふぁ', 'ひ': 'ふぃ', 'ふ': 'ひゅ', 'へ': 'ひゅぇ', 'ほ': 'ひょ',
+        'ま': 'むぁ', 'み': 'みゅぃ', 'む': 'みゅ', 'め': 'みゅぇ', 'も': 'みょ',
+        'や': 'ゆぁ', 'ゆ': 'ゆ', 'よ': 'ゆぉ',
+        'ら': 'りゃ', 'り': 'りゅぃ', 'る': 'りゅ', 'れ': 'りゅぇ', 'ろ': 'りょ',
+        'わ': 'うゎ', 'を': 'うぉ',
+        
+        // 濁音・半濁音
+        'が': 'ぎゅぁ', 'ぎ': 'ぎゅぃ', 'ぐ': 'ぎゅ', 'げ': 'ぎゅぇ', 'ご': 'ぎょ',
+        'ざ': 'ぢゃ', 'じ': 'ぢ', 'ず': 'ぢゅ', 'ぜ': 'ぢゅぇ', 'ぞ': 'ぢょ',
+        'だ': 'だゅぁ', 'ど': 'だゅぉ', // 表に基づき一部補完
+        'ば': 'びゃ', 'び': 'びゅぃ', 'ぶ': 'びゅ', 'べ': 'びゅぇ', 'ぼ': 'びゅぉ',
+        'ぱ': 'ぴゃ', 'ぴ': 'ぴゅぃ', 'ぷ': 'ぴゅ', 'ぺ': 'ぴぇ', 'ぽ': 'ぴょ'
+    };
+
+    const inputArea = document.getElementById('input');
+    const outputDiv = document.getElementById('output');
+
+    inputArea.addEventListener('input', () => {
+        let text = inputArea.value;
+        let result = '';
+
+        for (let char of text) {
+            // マップにあれば変換、なければそのまま
+            result += map[char] || char;
+        }
+        
+        outputDiv.innerText = result;
+    });
+</script>
+
+</body>
+</html>
